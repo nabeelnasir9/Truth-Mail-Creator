@@ -1,0 +1,82 @@
+Metadata-Version: 2.1
+Name: FlowViewer
+Version: 0.3.0
+Summary: Chrome浏览器数据包监听器。
+Home-page: https://gitee.com/g1879/FlowViewer
+Author: g1879
+Author-email: g1879@qq.com
+License: MIT
+Keywords: FlowViewer
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: BSD License
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: pychrome
+
+# ✨️简介
+
+FlowViewer 是一个基于 python 的 Chrome 浏览器数据包监测器。
+
+它可以异步监听浏览器收发数据，实时返回结果供同步程序使用。
+
+**使用文档：** 📒[点击打开](http://g1879.gitee.io/flowviewer)
+
+**联系邮箱：**  g1879@qq.com
+
+**QQ群：** 897838127
+
+# 📕背景
+
+许多网页的数据来自接口，在网站使用过程中动态加载，如使用 JS 加载内容的翻页列表。
+
+这些数据通常以 json 形式发送，浏览器接收后，对其进行解析，再加载到 DOM 相应位置。
+
+做数据采集的时候，我们往往从 DOM 中去获取解析后数据的，可能存在数据不全、加载响应不及时、难以判断加载完成等问题。
+
+使用本库，可把自动化与数据包检测结合起来，通过网络数据状况配合操作动作，使开发更便利，程序可靠性更高，设计空间更广阔。
+
+# 🍀 特性
+
+- 轻便，使用简单
+
+- 无侵入式检测，手动、自动程序都可使用
+
+- 可设置检测目标、数量、时间
+
+- 可同步使用检测到的数据
+
+- 可自动搜索 Chrome 进程，便于监听 selenium 打开的未知端口浏览器
+
+# 🎇简单示例
+
+这个示例简单介绍一下监听器的工作方式，具体用法看后面的章节。
+
+这是最简单的使用场景，使用监听器对 9222 端口的浏览器进行监听，不设置筛选条件，不使用自动化。人工操作浏览器，并把所有流过浏览器的数据包的 url 属性打印出来。这段程序是那么简单，甚至没有设置停止条件，所以不会自动停止。
+
+```python
+from FlowViewer import Listener
+
+listener =Listener(9222)  # 创建监听器，监听9222端口的浏览器
+listener.listen()  # 开始监听，不设置目标，无限制监听
+
+for data in listener.steps():  # 遍历所有监听到的数据包
+    print(data.url)  # 实时打印监听到的内容
+```
+
+# 🛠使用方法
+
+[点击跳转到使用手册](http://g1879.gitee.io/flowviewer)
+
+# 🖐🏻 免责声明
+
+请勿将 FlowViewer 应用到任何可能会违反法律规定和道德约束的工作中,请友善使用 FlowViewer，遵守蜘蛛协议，不要将 FlowViewer 用于任何非法用途。如您选择使用 FlowViewer 即代表您遵守此协议，作者不承担任何由于您违反此协议带来任何的法律风险和损失，一切后果由您承担。
+
+# ☕ 请我喝咖啡
+
+如果本项目对您有所帮助，不妨请作者我喝杯咖啡 ：）
+
+![](https://gitee.com/g1879/DrissionPage-demos/raw/master/pics/code.jpg)
